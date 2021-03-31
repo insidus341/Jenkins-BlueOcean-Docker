@@ -28,6 +28,9 @@ services:
       DOCKER_HOST: "tcp://dind:2375"
     networks:
       - jenkins_dind
+      sites:
+        aliases:
+          - jenkins
 
 networks:
   jenkins_dind:
