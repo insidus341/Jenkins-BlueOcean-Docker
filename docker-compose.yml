@@ -27,7 +27,7 @@ services:
     environment:
       DOCKER_HOST: "tcp://dind:2375"
     networks:
-      #- jenkins_dind
+      - jenkins_dind
       - proxynet
 
 networks:
