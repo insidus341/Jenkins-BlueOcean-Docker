@@ -1,4 +1,4 @@
-version: '2'
+version: '3.5'
 services:
   dind:
     image: docker:dind
@@ -27,11 +27,14 @@ services:
     environment:
       DOCKER_HOST: "tcp://dind:2375"
     networks:
-      - jenkins_dind
-      sites:
-        aliases:
-          - jenkins
+      #- jenkins_dind
+      - proxynet
 
 networks:
   jenkins_dind:
     driver: bridge
+
+  proxynet:
+    external:
+      name: proxy_sites
+    
