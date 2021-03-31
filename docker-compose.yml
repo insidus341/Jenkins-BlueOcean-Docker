@@ -27,11 +27,14 @@ services:
     environment:
       DOCKER_HOST: "tcp://dind:2375"
     networks:
-      - jenkins_dind
+      #- jenkins_dind
       sites:
         aliases:
           - jenkins
 
 networks:
   jenkins_dind:
+    driver: bridge
+    
+  sites:
     driver: bridge
