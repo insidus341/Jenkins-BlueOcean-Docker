@@ -1,36 +1,18 @@
 version: '3.5'
 services:
-  dind:
-    image: docker:dind
-    user: root
-    privileged: true
-    container_name: dind
-    expose:
-      - 2375
-    networks:
-      - jenkins_dind
-    environment:
-      DOCKER_TLS_CERTDIR: ""
-
   jenkins:
-    image: jenkinsci/blueocean:latest
+    #image: jenkinsci/blueocean:latest
+    image: jenkins/jenkins:lts
     user: root
     container_name: jenkins
-    depends_on:
-      - dind
     volumes:
       - ./jenkins:/var/jenkins_home
       - /usr/bin/docker:/usr/bin/docker
-    environment:
-      DOCKER_HOST: "tcp://dind:2375"
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - jenkins_dind
       - proxynet
 
 networks:
-  jenkins_dind:
-    driver: bridge
-
   proxynet:
     external:
       name: proxy_sites
